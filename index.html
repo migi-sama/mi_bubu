@@ -53,11 +53,11 @@
 
         /* Glassmorphism styling */
         .glass-panel {
-            background: rgba(15, 8, 28, 0.65);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: rgba(15, 8, 28, 0.75);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             border: 1px solid rgba(255, 215, 0, 0.2);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(255, 215, 0, 0.05);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
             border-radius: 1rem;
         }
 
@@ -71,9 +71,6 @@
         ::-webkit-scrollbar-thumb {
             background: rgba(255, 215, 0, 0.3);
             border-radius: 3px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 215, 0, 0.6);
         }
 
         /* Layout Helpers */
@@ -89,7 +86,7 @@
             position: relative;
             z-index: 20;
             width: 100%;
-            padding: 1.5rem;
+            padding: 1.25rem;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -97,13 +94,13 @@
         }
 
         #touchHint {
-            position: absolute;
+            position: fixed ;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: 20;
             pointer-events: none;
-            transition: opacity 1000ms ease;
+            transition: opacity 800ms ease;
             opacity: 0.8;
             display: flex;
             flex-direction: column;
@@ -122,15 +119,15 @@
             position: relative;
             z-index: 20;
             width: 100%;
-            padding: 1rem 1.5rem 1.5rem 1.5rem;
+            padding: 1rem;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
         .btn-magic {
-            background: rgba(15, 8, 28, 0.65);
-            backdrop-filter: blur(12px);
+            background: rgba(15, 8, 28, 0.75);
+            backdrop-filter: blur(8px);
             border: 1px solid rgba(255, 215, 0, 0.3);
             color: #fde68a;
             padding: 0.5rem 1rem;
@@ -140,11 +137,10 @@
             align-items: center;
             gap: 0.5rem;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: background 0.2s ease;
         }
         .btn-magic:hover {
             background: rgba(255, 165, 0, 0.2);
-            border-color: rgba(255, 215, 0, 0.6);
         }
         .btn-magic:active {
             transform: scale(0.95);
@@ -156,7 +152,7 @@
             inset: 0;
             z-index: 50;
             background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(8px);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -188,16 +184,16 @@
 </head>
 <body class="bg-magic">
 
-    <!-- Canvas para el fondo de estrellas y orbes de luz -->
+    <!-- Canvas para el fondo de estrellas optimizado -->
     <canvas id="bgCanvas" class="absolute-canvas pointer-none" style="z-index: 0;"></canvas>
 
-    <!-- Canvas interactivo principal de la flor de Rapunzel -->
+    <!-- Canvas interactivo principal -->
     <canvas id="flowerCanvas" class="absolute-canvas" style="z-index: 10; cursor: pointer;"></canvas>
 
     <!-- UI Overlay: Encabezado -->
     <header>
         <h1 class="font-cinzel" style="font-size: clamp(1.25rem, 3vw, 2rem); color: #fef08a; letter-spacing: 0.1em; text-shadow: 0 0 10px rgba(255, 215, 0, 0.6); text-align: center; opacity: 0.9;">
-            Flor Dorada Mágica
+            Flor de la gota de sol
         </h1>
         <p class="font-vibe text-glow-subtle" style="font-size: clamp(1.5rem, 4vw, 2.25rem); color: #fef9c3; margin-top: 0.25rem; text-align: center;">
             Para la luz de mi vida
@@ -209,23 +205,20 @@
         <div style="width: 3rem; height: 3rem; border-radius: 9999px; border: 1px solid rgba(253, 230, 138, 0.4); display: flex; align-items: center; justify-content: center; margin-bottom: 0.5rem;" class="animate-ping-custom">
             <div style="width: 1rem; height: 1rem; border-radius: 9999px; background-color: rgba(253, 230, 138, 0.7);"></div>
         </div>
-        <p style="font-size: 0.75rem; color: rgba(253, 230, 138, 0.8); letter-spacing: 0.15em; text-transform: uppercase; background: rgba(0,0,0,0.4); padding: 0.25rem 0.75rem; border-radius: 9999px; backdrop-filter: blur(4px); border: 1px solid rgba(245, 158, 11, 0.2);">
-            Toca la flor para desbloquear su magia
-        </p>
     </div>
 
     <!-- UI Overlay: Panel Inferior con Canción / Poema y Botones -->
     <footer>
-        <div class="glass-panel" style="padding: 1.25rem; max-width: 32rem; width: 100%; margin-bottom: 1rem; text-align: center; transition: all 0.5s ease;">
-            <p id="lyricText" class="font-vibe text-glow" style="font-size: clamp(1.25rem, 3vw, 1.875rem); color: #fef08a; line-height: 1.4;">
-                "Flor que da fulgor, con tu brillo fiel...<br>vuelve el tiempo atrás, traeme lo que fue."
+        <div class="glass-panel" style="max-width: 28rem; width: 100%; margin-bottom: 0.75rem; text-align: center;">
+            <p id="lyricText" class="font-vibe text-glow" style="font-size: clamp(1.15rem, 2.5vw, 1.75rem); color: #fef08a; line-height: 1.4;">
+                "Flor que da fulgor, con tu brillo fiel...<br>Mueve el tiempo atrás. Volviendo a lo que fue"
             </p>
-            <p style="font-size: 0.7rem; color: rgba(253, 230, 138, 0.6); text-transform: uppercase; letter-spacing: 0.15em; margin-top: 0.5rem; font-weight: 500;">
-                — Enredados / Tangled —
+            <p style="font-size: 0.7rem; color: rgba(253, 230, 138, 0.6); text-transform: uppercase; letter-spacing: 0.15em; margin-top: 0.35rem; font-weight: 500;">
+                — Con amor y cariño —
             </p>
         </div>
 
-        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; max-width: 28rem; width: 100%;">
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; max-width: 28rem; width: 100%;">
             <button onclick="toggleSound()" id="soundBtn" class="btn-magic">
                 <svg id="soundIcon" xmlns="http://www.w3.org/2000/svg" style="height: 1rem; width: 1rem; color: #fde047;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
@@ -239,20 +232,13 @@
                 </svg>
                 <span>Razones por las que te amo</span>
             </button>
-
-            <button onclick="triggerMagicalBurst()" class="btn-magic">
-                <svg xmlns="http://www.w3.org/2000/svg" style="height: 1rem; width: 1rem; color: #fde047;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-                </svg>
-                <span>Pedir un Deseo</span>
-            </button>
         </div>
     </footer>
 
-    <!-- Modal: Razones por las que te amo -->
+    <!-- Modal -->
     <div id="lettersModal" class="modal-overlay">
         <div class="glass-panel modal-box" id="modalContent">
-            <button onclick="closeModal('lettersModal')" style="position: absolute; top: 1rem; right: 1rem; color: #fde047; background: transparent; border: none; cursor: pointer; padding: 0.5rem; border-radius: 9999px; display: flex; align-items: center; justify-content: center; transition: background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='transparent'">
+            <button onclick="closeModal('lettersModal')" style="position: absolute; top: 1rem; right: 1rem; color: #fde047; background: transparent; border: none; cursor: pointer; padding: 0.5rem; border-radius: 9999px; display: flex; align-items: center; justify-content: center;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='transparent'">
                 <svg xmlns="http://www.w3.org/2000/svg" style="height: 1.5rem; width: 1.5rem;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
@@ -261,32 +247,32 @@
             <h2 class="font-cinzel text-glow" style="font-size: 1.5rem; color: #fef08a; text-align: center; margin-bottom: 0.25rem;">Para Mi Esposa</h2>
             <p style="font-size: 0.75rem; text-align: center; color: rgba(253, 230, 138, 0.7); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.15em;">Nuestra historia en destellos de luz</p>
 
-            <div style="overflow-y: auto; padding-right: 0.5rem; display: flex; flex-direction: column; gap: 1rem; color: rgba(254, 243, 199, 0.9); font-size: 0.875rem; line-height: 1.6; flex: 1;">
-                <div style="padding: 1rem; border-radius: 0.75rem; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.2);">
-                    <h3 style="font-weight: 600; color: #fde047; margin-bottom: 0.25rem;">✨ Tu Luz Incondicional</h3>
-                    <p style="margin: 0;">Así como esta flor dorada iluminó todo el reino en la historia, tu sonrisa e inteligencia iluminan cada rincón de mi vida desde el día en que nos conocimos.</p>
+            <div style="overflow-y: auto; padding-right: 0.5rem; display: flex; flex-direction: column; gap: 0.75rem; color: rgba(254, 243, 199, 0.9); font-size: 0.875rem; line-height: 1.5; flex: 1;">
+                <div style="padding: 0.85rem; border-radius: 0.75rem; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.2);">
+                    <h3 style="font-weight: 600; color: #fde047; margin-bottom: 0.2rem; margin-top: 0;">✨ Tu Luz Incondicional</h3>
+                    <p style="margin: 0;">Así como esta flor iluminó la historia, tu sonrisa e inteligencia iluminan mi vida.</p>
                 </div>
 
-                <div style="padding: 1rem; border-radius: 0.75rem; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.2);">
-                    <h3 style="font-weight: 600; color: #fde047; margin-bottom: 0.25rem;">💻 Creado con Código y Amor</h3>
+                <div style="padding: 0.85rem; border-radius: 0.75rem; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.2);">
+                    <h3 style="font-weight: 600; color: #fde047; margin-bottom: 0.2rem; margin-top: 0;">💻 Creado con Código y Amor</h3>
                     <p style="margin: 0;">Como informático, cada línea de código de esta flor animada fue escrita pensando en ti, cuidando cada destello y cada detalle para recordarte lo especial que eres para mí.</p>
                 </div>
 
-                <div style="padding: 1rem; border-radius: 0.75rem; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.2);">
-                    <h3 style="font-weight: 600; color: #fde047; margin-bottom: 0.25rem;">🌸 Un Deseo Eterno</h3>
-                    <p style="margin: 0;">"Curar lo dañado, cambiar el azar... guardar lo que pude un día ganar." Gracias por ser mi compañera de vida, mi mejor amiga y mi hogar.</p>
+                <div style="padding: 0.85rem; border-radius: 0.75rem; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.2);">
+                    <h3 style="font-weight: 600; color: #fde047; margin-bottom: 0.2rem; margin-top: 0;">🌸 Tú eres mi nuevo sueño</h3>
+                    <p style="margin: 0;">"Trae lo que perdí. Volviendo a lo que fue..." <br>Gracias por ser mi compañera de vida, mi mejor amiga, mi soporte y mi hogar.</p>
                 </div>
             </div>
 
-            <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(245, 158, 11, 0.2); text-align: center;">
-                <button onclick="closeModal('lettersModal')" style="background: linear-gradient(to right, #f59e0b, #ca8a04); color: #020617; font-weight: 500; padding: 0.5rem 1.5rem; border-radius: 9999px; border: none; cursor: pointer; transition: filter 0.2s, transform 0.1s; box-shadow: 0 10px 15px -3px rgba(245, 158, 11, 0.2);" onmouseover="this.style.filter='brightness(1.1)'" onmouseout="this.style.filter='none'">
+            <div style="margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid rgba(245, 158, 11, 0.2); text-align: center;">
+                <button onclick="closeModal('lettersModal')" style="background: linear-gradient(to right, #f59e0b, #ca8a04); color: #020617; font-weight: 500; padding: 0.5rem 1.5rem; border-radius: 9999px; border: none; cursor: pointer; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);" onmouseover="this.style.filter='brightness(1.1)'" onmouseout="this.style.filter='none'">
                     Cerrar y Volver a la Flor
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- JavaScript Principal -->
+    <!-- JavaScript Principal Optimizado -->
     <script>
         const bgCanvas = document.getElementById('bgCanvas');
         const bgCtx = bgCanvas.getContext('2d');
@@ -305,9 +291,10 @@
         let synthOscillators = [];
 
         const lyrics = [
-            '"Flor que da fulgor, con tu brillo fiel...<br>vuelve el tiempo atrás, traeme lo que fue."',
-            '"Sana lo que dañó, cambia el azar...<br>guarda lo que pude un día ganar."',
-            '"Lo que un día fue... mío volverá."',
+            '"Flor que da fulgor, con tu brillo fiel...<br>Mueve el tiempo atrás. Volviendo a lo que fue"',
+            '"Quita enfermedad...<br>Y el destino cruel."',
+            '"Trae lo que perdí. Volviendo a lo que fue..."',
+            '"A lo que fue..."',
             '"Veo en ti la luz, todo es nuevo ya...<br>todo ha cambiado desde que te vi."'
         ];
         let lyricIndex = 0;
@@ -323,22 +310,17 @@
             reset() {
                 this.x = Math.random() * width;
                 this.y = Math.random() * height;
-                this.size = Math.random() * 1.8 + 0.2;
-                this.alpha = Math.random() * 0.8 + 0.2;
-                this.speed = Math.random() * 0.02 + 0.005;
+                this.size = Math.random() * 1.5 + 0.3;
+                this.alpha = Math.random() * 0.7 + 0.2;
             }
             update() {
-                this.alpha += Math.sin(time * 2 + this.x) * 0.005;
-                if (this.alpha < 0.1) this.alpha = 0.1;
-                if (this.alpha > 0.9) this.alpha = 0.9;
+                this.alpha += (Math.random() - 0.5) * 0.05;
+                if (this.alpha < 0.2) this.alpha = 0.2;
+                if (this.alpha > 0.8) this.alpha = 0.8;
             }
             draw(c) {
-                c.save();
                 c.fillStyle = `rgba(255, 245, 210, ${this.alpha})`;
-                c.beginPath();
-                c.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                c.fill();
-                c.restore();
+                c.fillRect(this.x, this.y, this.size, this.size); // Usar fillRect en lugar de arc para mayor velocidad en móviles
             }
         }
 
@@ -348,41 +330,32 @@
                 this.reset(originX, originY);
             }
             reset(originX, originY) {
-                this.x = originX || width / 2 + (Math.random() - 0.5) * 60;
-                this.y = originY || height * 0.48 + (Math.random() - 0.5) * 60;
+                this.x = originX || width / 2 + (Math.random() - 0.5) * 50;
+                this.y = originY || height * 0.48 + (Math.random() - 0.5) * 50;
 
                 if (this.isBurst) {
                     const angle = Math.random() * Math.PI * 2;
-                    const speed = Math.random() * 6 + 2;
+                    const speed = Math.random() * 5 + 1.5;
                     this.vx = Math.cos(angle) * speed;
-                    this.vy = Math.sin(angle) * speed - Math.random() * 2;
-                    this.size = Math.random() * 4 + 2;
+                    this.vy = Math.sin(angle) * speed - 1;
+                    this.size = Math.random() * 3 + 1.5;
                     this.life = 1;
-                    this.decay = Math.random() * 0.02 + 0.01;
+                    this.decay = Math.random() * 0.03 + 0.015;
                 } else {
-                    this.vx = (Math.random() - 0.5) * 0.8;
-                    this.vy = -Math.random() * 1.5 - 0.5;
-                    this.size = Math.random() * 2.5 + 0.8;
-                    this.life = Math.random() * 0.8 + 0.2;
-                    this.decay = Math.random() * 0.008 + 0.003;
+                    this.vx = (Math.random() - 0.5) * 0.5;
+                    this.vy = -Math.random() * 1.2 - 0.4;
+                    this.size = Math.random() * 2 + 1;
+                    this.life = Math.random() * 0.7 + 0.3;
+                    this.decay = Math.random() * 0.01 + 0.004;
                 }
 
-                const colors = [
-                    'rgba(255, 230, 120, ',
-                    'rgba(255, 215, 0, ',
-                    'rgba(216, 180, 254, ', 
-                    'rgba(168, 85, 247, '   
-                ];
-                this.colorBase = colors[Math.floor(Math.random() * colors.length)];
+                const colors = ['#ffe678', '#ffd700', '#d8b4fe', '#a855f7'];
+                this.color = colors[Math.floor(Math.random() * colors.length)];
             }
             update() {
                 this.x += this.vx;
                 this.y += this.vy;
                 this.life -= this.decay;
-
-                if (!this.isBurst) {
-                    this.vx += Math.sin(time + this.y * 0.01) * 0.02;
-                }
 
                 if (this.life <= 0) {
                     if (this.isBurst) {
@@ -394,14 +367,12 @@
                 return true;
             }
             draw(c) {
-                c.save();
-                c.fillStyle = `${this.colorBase}${this.life})`;
-                c.shadowColor = '#FFD700';
-                c.shadowBlur = this.size * 3;
+                c.fillStyle = this.color;
+                c.globalAlpha = Math.max(0, this.life);
                 c.beginPath();
                 c.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 c.fill();
-                c.restore();
+                c.globalAlpha = 1.0; // Resetear opacidad global
             }
         }
 
@@ -414,19 +385,19 @@
             canvas.width = width;
             canvas.height = height;
 
+            // Reducir cantidad de estrellas y partículas para mejorar rendimiento en móviles
             if (bgStars.length === 0) {
-                for (let i = 0; i < 120; i++) bgStars.push(new Star());
+                for (let i = 0; i < 40; i++) bgStars.push(new Star());
             }
 
             if (magicParticles.length === 0) {
-                for (let i = 0; i < 60; i++) magicParticles.push(new FloatingParticle());
+                for (let i = 0; i < 18; i++) magicParticles.push(new FloatingParticle());
             }
         }
         window.addEventListener('resize', resize);
 
         function drawStemAndLeaves(centerX, centerY, scale) {
             ctx.save();
-
             ctx.beginPath();
             ctx.moveTo(centerX, centerY + 30 * scale);
             ctx.bezierCurveTo(
@@ -434,24 +405,21 @@
                 centerX + 30 * scale, centerY + 320 * scale,
                 centerX - 10 * scale, height
             );
-            ctx.lineWidth = 7 * scale;
+            ctx.lineWidth = 6 * scale;
 
             const stemGrad = ctx.createLinearGradient(centerX - 20, centerY, centerX + 20, height);
             stemGrad.addColorStop(0, '#5a8230');
-            stemGrad.addColorStop(0.5, '#2e4e18');
             stemGrad.addColorStop(1, '#132609');
 
             ctx.strokeStyle = stemGrad;
-            ctx.shadowColor = '#436320';
-            ctx.shadowBlur = 10 * glowIntensity;
             ctx.stroke();
 
             // Hoja Izquierda
             ctx.beginPath();
             ctx.moveTo(centerX - 5 * scale, centerY + 150 * scale);
             ctx.bezierCurveTo(
-                centerX - 70 * scale, centerY + 120 * scale,
-                centerX - 100 * scale, centerY + 170 * scale,
+                centerX - 60 * scale, centerY + 130 * scale,
+                centerX - 80 * scale, centerY + 170 * scale,
                 centerX - 10 * scale, centerY + 185 * scale
             );
             ctx.fillStyle = '#2d4d16';
@@ -461,8 +429,8 @@
             ctx.beginPath();
             ctx.moveTo(centerX + 12 * scale, centerY + 220 * scale);
             ctx.bezierCurveTo(
-                centerX + 80 * scale, centerY + 190 * scale,
-                centerX + 110 * scale, centerY + 240 * scale,
+                centerX + 70 * scale, centerY + 200 * scale,
+                centerX + 90 * scale, centerY + 240 * scale,
                 centerX + 15 * scale, centerY + 255 * scale
             );
             ctx.fillStyle = '#223c10';
@@ -478,14 +446,12 @@
             const petalGrad = ctx.createLinearGradient(0, 0, 0, -len);
             if (isViolet) {
                 petalGrad.addColorStop(0, '#E9D5FF');   
-                petalGrad.addColorStop(0.3, '#C084FC'); 
-                petalGrad.addColorStop(0.7, '#7E22CE'); 
-                petalGrad.addColorStop(1, 'rgba(147, 51, 234, 0.9)');
+                petalGrad.addColorStop(0.4, '#C084FC'); 
+                petalGrad.addColorStop(1, '#7E22CE'); 
             } else {
                 petalGrad.addColorStop(0, '#FFF59D');   
-                petalGrad.addColorStop(0.3, '#FFD700'); 
-                petalGrad.addColorStop(0.7, '#FFA000'); 
-                petalGrad.addColorStop(1, 'rgba(255, 235, 150, 0.9)');
+                petalGrad.addColorStop(0.4, '#FFD700'); 
+                petalGrad.addColorStop(1, '#FFA000'); 
             }
 
             ctx.beginPath();
@@ -502,16 +468,7 @@
             );
 
             ctx.fillStyle = petalGrad;
-            ctx.shadowColor = isViolet ? '#C084FC' : '#FFD700';
-            ctx.shadowBlur = 20 * glowIntensity;
             ctx.fill();
-
-            ctx.beginPath();
-            ctx.moveTo(0, 0);
-            ctx.lineTo(0, -len * 0.85);
-            ctx.strokeStyle = 'rgba(255, 255, 230, 0.7)';
-            ctx.lineWidth = 2;
-            ctx.stroke();
 
             ctx.restore();
         }
@@ -520,66 +477,41 @@
             const responsiveScale = Math.min(width, height) / 800;
             const baseScale = Math.max(0.65, responsiveScale);
 
-            const pulse = Math.sin(time * 2.5) * 0.08 + (isGlowActive ? 0.25 : 0);
-            const petalLength = 140 * baseScale;
-            const petalWidth = 55 * baseScale;
+            const pulse = Math.sin(time * 2) * 0.06 + (isGlowActive ? 0.2 : 0);
+            const petalLength = 130 * baseScale;
+            const petalWidth = 50 * baseScale;
 
             drawStemAndLeaves(centerX, centerY, baseScale);
 
             ctx.save();
             ctx.translate(centerX, centerY);
 
-            const radialGlow = ctx.createRadialGradient(0, 0, 10, 0, 0, 220 * baseScale * glowIntensity);
-            radialGlow.addColorStop(0, 'rgba(255, 225, 100, 0.6)');
-            radialGlow.addColorStop(0.4, 'rgba(255, 170, 0, 0.25)');
+            // Resplandor de fondo ligero (sin shadowBlur costoso)
+            const radialGlow = ctx.createRadialGradient(0, 0, 10, 0, 0, 180 * baseScale);
+            radialGlow.addColorStop(0, 'rgba(255, 225, 100, 0.4)');
             radialGlow.addColorStop(1, 'rgba(255, 140, 0, 0)');
 
             ctx.fillStyle = radialGlow;
             ctx.beginPath();
-            ctx.arc(0, 0, 220 * baseScale * glowIntensity, 0, Math.PI * 2);
+            ctx.arc(0, 0, 180 * baseScale, 0, Math.PI * 2);
             ctx.fill();
 
-            // Capa 1: Pétalos Traseros / Externos (Dorados)
+            // Capa 1: Pétalos Traseros (Dorados)
             const numPetalsBack = 8;
             for (let i = 0; i < numPetalsBack; i++) {
-                const angle = (i * Math.PI * 2) / numPetalsBack + Math.sin(time + i) * 0.02;
-                drawSinglePetal(petalLength * 1.1, petalWidth * 1.1, angle, pulse, false);
+                const angle = (i * Math.PI * 2) / numPetalsBack;
+                drawSinglePetal(petalLength * 1.05, petalWidth * 1.05, angle, pulse, false);
             }
 
-            // Capa 2: Pétalos Delanteros / Centrales (VIOLETAS)
+            // Capa 2: Pétalos Delanteros (Violetas)
             const numPetalsFront = 8;
             for (let i = 0; i < numPetalsFront; i++) {
-                const angle = (i * Math.PI * 2) / numPetalsFront + (Math.PI / numPetalsFront) + Math.cos(time * 1.5 + i) * 0.02;
-                drawSinglePetal(petalLength * 0.75, petalWidth * 0.75, angle, pulse, true);
+                const angle = (i * Math.PI * 2) / numPetalsFront + (Math.PI / numPetalsFront);
+                drawSinglePetal(petalLength * 0.7, petalWidth * 0.7, angle, pulse, true);
             }
 
-            // Capa 3: Estambres y Núcleo resplandeciente
-            const numStamens = 7;
-            for (let i = 0; i < numStamens; i++) {
-                const stamenAngle = (i * Math.PI * 2) / numStamens;
-                const stamenLen = 45 * baseScale + Math.sin(time * 3 + i) * 3;
-
-                ctx.save();
-                ctx.rotate(stamenAngle);
-
-                ctx.beginPath();
-                ctx.moveTo(0, 0);
-                ctx.quadraticCurveTo(10, -stamenLen * 0.5, 0, -stamenLen);
-                ctx.strokeStyle = 'rgba(255, 245, 180, 0.9)';
-                ctx.lineWidth = 2 * baseScale;
-                ctx.stroke();
-
-                ctx.beginPath();
-                ctx.arc(0, -stamenLen, 4.5 * baseScale, 0, Math.PI * 2);
-                ctx.fillStyle = '#FFFFFF';
-                ctx.shadowColor = '#FFEA00';
-                ctx.shadowBlur = 12;
-                ctx.fill();
-
-                ctx.restore();
-            }
-
-            const coreGlow = ctx.createRadialGradient(0, 0, 2, 0, 0, 25 * baseScale);
+            // Núcleo central
+            const coreGlow = ctx.createRadialGradient(0, 0, 2, 0, 0, 20 * baseScale);
             coreGlow.addColorStop(0, '#FFFFFF');
             coreGlow.addColorStop(0.5, '#FFF176');
             coreGlow.addColorStop(1, '#FF9800');
@@ -587,8 +519,6 @@
             ctx.beginPath();
             ctx.arc(0, 0, 10 * baseScale, 0, Math.PI * 2);
             ctx.fillStyle = coreGlow;
-            ctx.shadowColor = '#FFE082';
-            ctx.shadowBlur = 25 * glowIntensity;
             ctx.fill();
 
             ctx.restore();
@@ -598,9 +528,9 @@
             time += 0.02;
 
             if (glowIntensity > 1) {
-                glowIntensity -= 0.015;
+                glowIntensity -= 0.02;
             } else {
-                glowIntensity = 1 + Math.sin(time * 2) * 0.15;
+                glowIntensity = 1;
             }
 
             bgCtx.clearRect(0, 0, width, height);
@@ -637,10 +567,11 @@
             const burstX = customX || width / 2;
             const burstY = customY || height * 0.48;
 
-            glowIntensity = 2.4;
+            glowIntensity = 2;
             isGlowActive = true;
 
-            for (let i = 0; i < 70; i++) {
+            // Reducir la cantidad de partículas de explosión a 30 para fluidez en móviles
+            for (let i = 0; i < 30; i++) {
                 burstParticles.push(new FloatingParticle(burstX, burstY, true));
             }
 
@@ -656,7 +587,7 @@
             setTimeout(() => {
                 lyricElem.innerHTML = lyrics[lyricIndex];
                 lyricElem.style.opacity = 1;
-            }, 250);
+            }, 200);
 
             if (isPlayingAudio) playMagicChime();
         }
@@ -695,7 +626,7 @@
         }
 
         function startAmbientPad() {
-            const freqs = [146.83, 185.00, 220.00, 277.18];
+            const freqs = [146.83, 185.00, 220.00];
             synthOscillators = [];
 
             freqs.forEach(freq => {
@@ -706,7 +637,7 @@
                 osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
 
                 gain.gain.setValueAtTime(0.01, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.05, audioCtx.currentTime + 3);
+                gain.gain.exponentialRampToValueAtTime(0.04, audioCtx.currentTime + 2);
 
                 osc.connect(gain);
                 gain.connect(audioCtx.destination);
@@ -718,41 +649,39 @@
 
         function stopAmbientPad() {
             synthOscillators.forEach(item => {
-                item.gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 1);
-                setTimeout(() => item.osc.stop(), 1000);
+                item.gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.8);
+                setTimeout(() => item.osc.stop(), 800);
             });
             synthOscillators = [];
         }
 
         function playMagicChime() {
             if (!audioCtx) return;
-            const notes = [587.33, 659.25, 739.99, 880.00, 1046.50, 1174.66];
+            const notes = [587.33, 739.99, 880.00, 1174.66];
             notes.forEach((freq, idx) => {
                 const osc = audioCtx.createOscillator();
                 const gain = audioCtx.createGain();
 
                 osc.type = 'triangle';
-                osc.frequency.setValueAtTime(freq, audioCtx.currentTime + idx * 0.08);
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime + idx * 0.06);
 
-                gain.gain.setValueAtTime(0.08, audioCtx.currentTime + idx * 0.08);
-                gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + idx * 0.08 + 1.2);
+                gain.gain.setValueAtTime(0.06, audioCtx.currentTime + idx * 0.06);
+                gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + idx * 0.06 + 0.8);
 
                 osc.connect(gain);
                 gain.connect(audioCtx.destination);
 
-                osc.start(audioCtx.currentTime + idx * 0.08);
-                osc.stop(audioCtx.currentTime + idx * 0.08 + 1.2);
+                osc.start(audioCtx.currentTime + idx * 0.06);
+                osc.stop(audioCtx.currentTime + idx * 0.06 + 0.8);
             });
         }
 
         function openModal(id) {
-            const modal = document.getElementById(id);
-            modal.classList.add('active');
+            document.getElementById(id).classList.add('active');
         }
 
         function closeModal(id) {
-            const modal = document.getElementById(id);
-            modal.classList.remove('active');
+            document.getElementById(id).classList.remove('active');
         }
 
         window.onload = () => {
