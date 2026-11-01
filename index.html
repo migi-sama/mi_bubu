@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para Mi Amor - Flor Dorada Mágica</title>
+    <title>Para Mi Amor</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,6 +11,7 @@
     <style>
         *, *::before, *::after {
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
         body {
             margin: 0;
@@ -208,6 +209,9 @@
     </div>
 
     <!-- UI Overlay: Panel Inferior con Canción / Poema y Botones -->
+     <audio id="bgAudio" loop="true">
+            <source src="music.mpeg" type="audio/mpeg">
+    </audio>
     <footer>
         <div class="glass-panel" style="max-width: 28rem; width: 100%; margin-bottom: 0.75rem; text-align: center;">
             <p id="lyricText" class="font-vibe text-glow" style="font-size: clamp(1.15rem, 2.5vw, 1.75rem); color: #fef08a; line-height: 1.4;">
@@ -219,13 +223,6 @@
         </div>
 
         <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; max-width: 28rem; width: 100%;">
-            <button onclick="toggleSound()" id="soundBtn" class="btn-magic">
-                <svg id="soundIcon" xmlns="http://www.w3.org/2000/svg" style="height: 1rem; width: 1rem; color: #fde047;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
-                </svg>
-                <span id="soundText">Música de Fondo</span>
-            </button>
-
             <button onclick="openModal('lettersModal')" class="btn-magic">
                 <svg xmlns="http://www.w3.org/2000/svg" style="height: 1rem; width: 1rem; color: #fde047;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
@@ -245,22 +242,22 @@
             </button>
 
             <h2 class="font-cinzel text-glow" style="font-size: 1.5rem; color: #fef08a; text-align: center; margin-bottom: 0.25rem;">Para Mi Esposa</h2>
-            <p style="font-size: 0.75rem; text-align: center; color: rgba(253, 230, 138, 0.7); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.15em;">Nuestra historia en destellos de luz</p>
+            <p style="font-size: 0.75rem; text-align: center; color: rgba(253, 230, 138, 0.7); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.15em;">Digna de amor</p>
 
             <div style="overflow-y: auto; padding-right: 0.5rem; display: flex; flex-direction: column; gap: 0.75rem; color: rgba(254, 243, 199, 0.9); font-size: 0.875rem; line-height: 1.5; flex: 1;">
                 <div style="padding: 0.85rem; border-radius: 0.75rem; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.2);">
                     <h3 style="font-weight: 600; color: #fde047; margin-bottom: 0.2rem; margin-top: 0;">✨ Tu Luz Incondicional</h3>
-                    <p style="margin: 0;">Así como esta flor iluminó la historia, tu sonrisa e inteligencia iluminan mi vida.</p>
+                    <p style="margin: 0;">Me llenas de orgullo con tus acciones, y tu perseverancia. Junto a Dios, haces que mi vida tenga un resplandor por el cual caminar.</p>
                 </div>
 
                 <div style="padding: 0.85rem; border-radius: 0.75rem; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.2);">
-                    <h3 style="font-weight: 600; color: #fde047; margin-bottom: 0.2rem; margin-top: 0;">💻 Creado con Código y Amor</h3>
-                    <p style="margin: 0;">Como informático, cada línea de código de esta flor animada fue escrita pensando en ti, cuidando cada destello y cada detalle para recordarte lo especial que eres para mí.</p>
+                    <h3 style="font-weight: 600; color: #fde047; margin-bottom: 0.2rem; margin-top: 0;">👑 Mujer virtuosa</h3>
+                    <p style="margin: 0;">Íntegra, inteligente, bondadosa, esforzada, dedicada y detallista. <br>Un amor así sólo es un regalo del cielo que Dios me permitió vivir a través de ti.</p>
                 </div>
 
                 <div style="padding: 0.85rem; border-radius: 0.75rem; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.2);">
-                    <h3 style="font-weight: 600; color: #fde047; margin-bottom: 0.2rem; margin-top: 0;">🌸 Tú eres mi nuevo sueño</h3>
-                    <p style="margin: 0;">"Trae lo que perdí. Volviendo a lo que fue..." <br>Gracias por ser mi compañera de vida, mi mejor amiga, mi soporte y mi hogar.</p>
+                    <h3 style="font-weight: 600; color: #fde047; margin-bottom: 0.2rem; margin-top: 0;">🌸 Eres mi nuevo sueño</h3>
+                    <p style="margin: 0;">Gracias por ser mi compañera de vida, mi mejor amiga, mi soporte y mi hogar.<br>Cambiaste mi vida a un nuevo rumbo; y cada día no sé qué aventura nos espera; solo me alegra que sea contigo</p>
                 </div>
             </div>
 
@@ -286,16 +283,11 @@
         let glowIntensity = 1;
         let touchHintDismissed = false;
 
-        let audioCtx = null;
-        let isPlayingAudio = false;
-        let synthOscillators = [];
-
         const lyrics = [
             '"Flor que da fulgor, con tu brillo fiel...<br>Mueve el tiempo atrás. Volviendo a lo que fue"',
             '"Quita enfermedad...<br>Y el destino cruel."',
             '"Trae lo que perdí. Volviendo a lo que fue..."',
-            '"A lo que fue..."',
-            '"Veo en ti la luz, todo es nuevo ya...<br>todo ha cambiado desde que te vi."'
+            '"Esta vez, todo es diferente...<br>Veo en ti la luz."'
         ];
         let lyricIndex = 0;
 
@@ -589,92 +581,25 @@
                 lyricElem.style.opacity = 1;
             }, 200);
 
-            if (isPlayingAudio) playMagicChime();
         }
 
         canvas.addEventListener('click', (e) => {
             const rect = canvas.getBoundingClientRect();
             const clickX = e.clientX - rect.left;
             const clickY = e.clientY - rect.top;
+
+            // Reproducir el audio en la primera interacción del usuario
+            const audio = document.getElementById('bgAudio');
+            if (audio.paused) {
+                audio.play().catch(error => {
+                    console.log("Error al reproducir el audio: ", error);
+                });
+            }
+
+
             triggerMagicalBurst(clickX, clickY);
         });
 
-        function initAudio() {
-            if (!audioCtx) {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            }
-        }
-
-        function toggleSound() {
-            initAudio();
-            if (audioCtx.state === 'suspended') {
-                audioCtx.resume();
-            }
-
-            const btnText = document.getElementById('soundText');
-
-            if (isPlayingAudio) {
-                stopAmbientPad();
-                isPlayingAudio = false;
-                btnText.textContent = "Música de Fondo";
-            } else {
-                startAmbientPad();
-                isPlayingAudio = true;
-                btnText.textContent = "Pausar Música";
-                playMagicChime();
-            }
-        }
-
-        function startAmbientPad() {
-            const freqs = [146.83, 185.00, 220.00];
-            synthOscillators = [];
-
-            freqs.forEach(freq => {
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-
-                gain.gain.setValueAtTime(0.01, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.04, audioCtx.currentTime + 2);
-
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-                osc.start();
-
-                synthOscillators.push({ osc, gain });
-            });
-        }
-
-        function stopAmbientPad() {
-            synthOscillators.forEach(item => {
-                item.gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.8);
-                setTimeout(() => item.osc.stop(), 800);
-            });
-            synthOscillators = [];
-        }
-
-        function playMagicChime() {
-            if (!audioCtx) return;
-            const notes = [587.33, 739.99, 880.00, 1174.66];
-            notes.forEach((freq, idx) => {
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-
-                osc.type = 'triangle';
-                osc.frequency.setValueAtTime(freq, audioCtx.currentTime + idx * 0.06);
-
-                gain.gain.setValueAtTime(0.06, audioCtx.currentTime + idx * 0.06);
-                gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + idx * 0.06 + 0.8);
-
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-
-                osc.start(audioCtx.currentTime + idx * 0.06);
-                osc.stop(audioCtx.currentTime + idx * 0.06 + 0.8);
-            });
-        }
 
         function openModal(id) {
             document.getElementById(id).classList.add('active');
